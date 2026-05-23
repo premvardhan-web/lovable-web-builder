@@ -25,7 +25,7 @@ await writeFile(".vercel/output/functions/index.func/index.mjs", handlerTemplate
 await writeFile(
   ".vercel/output/functions/index.func/.vc-config.json",
   JSON.stringify({
-    runtime: "nodejs18.x",
+    runtime: "nodejs20.x",
     handler: "index.mjs",
   }, null, 2)
 );
