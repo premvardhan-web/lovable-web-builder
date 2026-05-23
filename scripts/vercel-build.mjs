@@ -1,5 +1,5 @@
-import { cp, mkdir, writeFile, rm } from "node:fs/promises";
-import { execSync } from "node:fs";
+import { cp, mkdir, writeFile, rm, readFile } from "node:fs/promises";
+import { execSync } from "node:child_process";
 
 // 1. Build the app for Vercel (no Cloudflare plugin)
 console.log("Building for Vercel...");
@@ -18,7 +18,7 @@ await cp("dist/client/", ".vercel/output/static/", { recursive: true });
 await cp("dist/server/", ".vercel/output/functions/index.func/", { recursive: true });
 
 // 5. Copy the handler template
-const handlerTemplate = await import("node:fs/promises").then(m => m.readFile("scripts/templates/vercel-handler.mjs", "utf-8"));
+const handlerTemplate = await readFile("scripts/templates/vercel-handler.mjs", "utf-8");
 await writeFile(".vercel/output/functions/index.func/index.mjs", handlerTemplate);
 
 // 6. Create function config (Node.js 18)
