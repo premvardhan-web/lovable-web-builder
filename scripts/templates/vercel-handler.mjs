@@ -20,7 +20,7 @@ export default async function handler(req, res) {
     body,
   });
 
-  const response = await server.default.fetch(request, {}, { waitUntil: () => {} });
+  const response = await server.fetch(request, {}, { waitUntil: () => {} });
 
   res.statusCode = response.status;
   response.headers.forEach((value, key) => res.setHeader(key, value));
